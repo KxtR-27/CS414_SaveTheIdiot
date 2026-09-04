@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://kk8m7xmlonb5" path="res://player_character.gd" id="1_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://mm4p6mieif4v" path="res://icon.svg" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://d1ks7xuvlpa75" path="res://base_enemy.tscn" id="3_h2yge"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_llgru"]
 radius = 50.0
@@ -23,6 +24,10 @@ one_shot = true
 
 [node name="Ability2Cooldown" type="Timer" parent="PlayerCharacter" unique_id=1410557548]
 one_shot = true
+
+[node name="BaseEnemy" parent="." unique_id=1599695685 node_paths=PackedStringArray("target") instance=ExtResource("3_h2yge")]
+position = Vector2(695, 257)
+target = NodePath("../PlayerCharacter")
 
 [connection signal="timeout" from="PlayerCharacter/Ability1Cooldown" to="PlayerCharacter" method="_on_ability_1_cooldown_timeout"]
 [connection signal="timeout" from="PlayerCharacter/Ability2Cooldown" to="PlayerCharacter" method="_on_ability_2_cooldown_timeout"]
