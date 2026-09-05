@@ -8,5 +8,6 @@
 [node name="BasePlayer" parent="." unique_id=72684832 instance=ExtResource("1_0xm2m")]
 position = Vector2(216, 158)
 
-[node name="BaseEnemy" parent="." unique_id=1599695685 instance=ExtResource("3_h2yge")]
+[node name="BaseEnemy" parent="." unique_id=1599695685 node_paths=PackedStringArray("target") instance=ExtResource("3_h2yge")]
 position = Vector2(881, 356)
+target = NodePath("../BasePlayer")

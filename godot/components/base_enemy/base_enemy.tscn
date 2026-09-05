@@ -24,6 +24,9 @@ position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_8vink")
 
 [node name="Area" type="Area2D" parent="." unique_id=1541520317]
+visible = false
+monitoring = false
+monitorable = false
 metadata/_edit_lock_ = true
 
 [node name="Shape" type="CollisionShape2D" parent="Area" unique_id=2054265119]

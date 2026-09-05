@@ -8,6 +8,7 @@ radius = 50.0
 
 [node name="BasePlayer" type="CharacterBody2D" unique_id=72684832]
 script = ExtResource("1_qp1xa")
+metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=557455774]
 scale = Vector2(0.8, 0.8)
