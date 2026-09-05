@@ -28,6 +28,9 @@ one_shot = true
 [node name="BaseEnemy" parent="." unique_id=1599695685 node_paths=PackedStringArray("target") instance=ExtResource("3_h2yge")]
 position = Vector2(695, 257)
 target = NodePath("../PlayerCharacter")
+speed = 0.2
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=964846865]
 
 [connection signal="timeout" from="PlayerCharacter/Ability1Cooldown" to="PlayerCharacter" method="_on_ability_1_cooldown_timeout"]
 [connection signal="timeout" from="PlayerCharacter/Ability2Cooldown" to="PlayerCharacter" method="_on_ability_2_cooldown_timeout"]
