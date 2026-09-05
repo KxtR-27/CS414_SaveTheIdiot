@@ -28,6 +28,10 @@ gdscript/warnings/unsafe_call_argument=1
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[global_group]
+
+targets=""
+
 [input]
 
 ability1={

@@ -21,7 +21,6 @@ func _process(delta: float) -> void:
 		move_towards_point(target.position, delta)
 	else:
 		move_towards_point(center, delta)
-		
 	pass
 	
 func move_towards_point(point : Variant, delta: float) -> void:
@@ -29,7 +28,8 @@ func move_towards_point(point : Variant, delta: float) -> void:
 	self.position += dir_to_target * delta * speed
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if (body == CharacterBody2D):
+	if (body.is_in_group("targets") && !target):
+		print('wow')
 		target = body
 		curr_state = State.TARGETING
 	pass # Replace with function body.

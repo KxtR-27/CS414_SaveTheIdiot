@@ -9,7 +9,8 @@ radius = 50.0
 
 [node name="Node2D" type="Node2D" unique_id=218919239]
 
-[node name="PlayerCharacter" type="CharacterBody2D" parent="." unique_id=1331257748]
+[node name="PlayerCharacter" type="CharacterBody2D" parent="." unique_id=1331257748 groups=["targets"]]
+position = Vector2(-228, -142)
 script = ExtResource("1_0xm2m")
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerCharacter" unique_id=885468083]
@@ -25,10 +26,9 @@ one_shot = true
 [node name="Ability2Cooldown" type="Timer" parent="PlayerCharacter" unique_id=1410557548]
 one_shot = true
 
-[node name="BaseEnemy" parent="." unique_id=1599695685 node_paths=PackedStringArray("target") instance=ExtResource("3_h2yge")]
+[node name="BaseEnemy" parent="." unique_id=1599695685 instance=ExtResource("3_h2yge")]
 position = Vector2(695, 257)
-target = NodePath("../PlayerCharacter")
-speed = 0.2
+speed = 0.5
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=964846865]
 
