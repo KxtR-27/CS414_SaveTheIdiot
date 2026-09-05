@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d1ks7xuvlpa75"]
 
-[ext_resource type="Script" uid="uid://bw1quqx726ye3" path="res://base_enemy.gd" id="1_72wxb"]
+[ext_resource type="Script" uid="uid://bw1quqx726ye3" path="res://components/base_enemy/base_enemy.gd" id="1_72wxb"]
 [ext_resource type="Texture2D" uid="uid://mm4p6mieif4v" path="res://icon.svg" id="2_nxij1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8vink"]
@@ -12,20 +12,22 @@ radius = 26.74813
 [node name="BaseEnemy" type="CharacterBody2D" unique_id=1599695685]
 scale = Vector2(0.9599999, 0.9599999)
 script = ExtResource("1_72wxb")
+metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=703301080]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=703301080]
 position = Vector2(1, 0)
 scale = Vector2(0.3828125, 1)
 texture = ExtResource("2_nxij1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2032780794]
+[node name="Shape" type="CollisionShape2D" parent="." unique_id=2032780794]
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_8vink")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1541520317]
+[node name="Area" type="Area2D" parent="." unique_id=1541520317]
+metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2054265119]
+[node name="Shape" type="CollisionShape2D" parent="Area" unique_id=2054265119]
 scale = Vector2(15.916666, 15.916666)
 shape = SubResource("CircleShape2D_n3d2o")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area" to="." method="_on_area_2d_body_entered"]

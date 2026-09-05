@@ -1,36 +1,12 @@
 [gd_scene format=3 uid="uid://jp4phtq15x75"]
 
-[ext_resource type="Script" uid="uid://kk8m7xmlonb5" path="res://player_character.gd" id="1_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://mm4p6mieif4v" path="res://icon.svg" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://d1ks7xuvlpa75" path="res://base_enemy.tscn" id="3_h2yge"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_llgru"]
-radius = 50.0
+[ext_resource type="PackedScene" uid="uid://8ojtytwbd10o" path="res://components/base_player/base_player.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://d1ks7xuvlpa75" path="res://components/base_enemy/base_enemy.tscn" id="3_h2yge"]
 
 [node name="Node2D" type="Node2D" unique_id=218919239]
 
-[node name="PlayerCharacter" type="CharacterBody2D" parent="." unique_id=1331257748 groups=["targets"]]
-position = Vector2(-228, -142)
-script = ExtResource("1_0xm2m")
-
-[node name="Sprite2D" type="Sprite2D" parent="PlayerCharacter" unique_id=885468083]
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("2_h2yge")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCharacter" unique_id=1677060244]
-shape = SubResource("CircleShape2D_llgru")
-
-[node name="Ability1Cooldown" type="Timer" parent="PlayerCharacter" unique_id=1157406371]
-one_shot = true
-
-[node name="Ability2Cooldown" type="Timer" parent="PlayerCharacter" unique_id=1410557548]
-one_shot = true
+[node name="BasePlayer" parent="." unique_id=72684832 instance=ExtResource("1_0xm2m")]
+position = Vector2(216, 158)
 
 [node name="BaseEnemy" parent="." unique_id=1599695685 instance=ExtResource("3_h2yge")]
-position = Vector2(695, 257)
-speed = 0.5
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=964846865]
-
-[connection signal="timeout" from="PlayerCharacter/Ability1Cooldown" to="PlayerCharacter" method="_on_ability_1_cooldown_timeout"]
-[connection signal="timeout" from="PlayerCharacter/Ability2Cooldown" to="PlayerCharacter" method="_on_ability_2_cooldown_timeout"]
+position = Vector2(881, 356)

@@ -1,3 +1,4 @@
+class_name BaseEnemy
 extends CharacterBody2D
 
 @onready var curr_state : State = State.LOCATING

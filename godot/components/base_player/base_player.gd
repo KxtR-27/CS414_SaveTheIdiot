@@ -1,3 +1,4 @@
+class_name BasePlayer
 extends CharacterBody2D
 
 var ability_cooldowns : Dictionary = {
@@ -24,7 +25,7 @@ func _process(delta: float) -> void:
 		not ability_cooldowns["Q"]
 	):
 		ability_cooldowns["Q"] = true
-		var timer : Timer = $Ability1Cooldown
+		var timer : Timer = $Cooldowns/Ability1Cooldown
 		timer.start()
 		print("pressed Q")
 	
@@ -32,7 +33,7 @@ func _process(delta: float) -> void:
 		not ability_cooldowns["E"]
 	):
 		ability_cooldowns["E"] = true
-		var timer : Timer = $Ability2Cooldown
+		var timer : Timer = $Cooldowns/Ability2Cooldown
 		timer.start()
 		print("pressed E")
 

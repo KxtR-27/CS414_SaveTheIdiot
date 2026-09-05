@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://8ojtytwbd10o"]
+
+[ext_resource type="Script" uid="uid://kk8m7xmlonb5" path="res://components/base_player/base_player.gd" id="1_qp1xa"]
+[ext_resource type="Texture2D" uid="uid://mm4p6mieif4v" path="res://icon.svg" id="2_xxaf0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_llgru"]
+radius = 50.0
+
+[node name="BasePlayer" type="CharacterBody2D" unique_id=72684832]
+script = ExtResource("1_qp1xa")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=557455774]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_xxaf0")
+
+[node name="Shape" type="CollisionShape2D" parent="." unique_id=1462866936]
+shape = SubResource("CircleShape2D_llgru")
+
+[node name="Cooldowns" type="Node" parent="." unique_id=573484517]
+
+[node name="Ability1Cooldown" type="Timer" parent="Cooldowns" unique_id=367998007]
+one_shot = true
+
+[node name="Ability2Cooldown" type="Timer" parent="Cooldowns" unique_id=367669852]
+one_shot = true
+
+[node name="Camera" type="Camera2D" parent="." unique_id=1574301220]
+
+[connection signal="timeout" from="Cooldowns/Ability1Cooldown" to="." method="_on_ability_1_cooldown_timeout"]
+[connection signal="timeout" from="Cooldowns/Ability2Cooldown" to="." method="_on_ability_2_cooldown_timeout"]
