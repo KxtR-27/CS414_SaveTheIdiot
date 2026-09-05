@@ -2,7 +2,7 @@ class_name BaseEnemy
 extends CharacterBody2D
 
 @onready var curr_state : State = State.LOCATING
-@onready var detection_area : Area2D = $Area2D
+@onready var detection_area : Area2D = $Area
 @export var center : Vector2
 @export var target : CharacterBody2D
 @export var speed : float = 0.1
