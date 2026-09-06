@@ -1,21 +1,27 @@
 [gd_scene format=3 uid="uid://8ojtytwbd10o"]
 
 [ext_resource type="Script" uid="uid://kk8m7xmlonb5" path="res://components/base_player/base_player.gd" id="1_qp1xa"]
-[ext_resource type="Texture2D" uid="uid://mm4p6mieif4v" path="res://icon.svg" id="2_xxaf0"]
+[ext_resource type="SpriteFrames" uid="uid://dal0adb4yewow" path="res://resources/swordsman_spriteframes.tres" id="2_0n512"]
+[ext_resource type="Script" uid="uid://cg3h6gbsrxp6g" path="res://scripts/movable_sprite.gd" id="3_ax8wi"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_llgru"]
-radius = 50.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hny28"]
+size = Vector2(48, 48)
 
 [node name="BasePlayer" type="CharacterBody2D" unique_id=72684832 groups=["targets"]]
 script = ExtResource("1_qp1xa")
 metadata/_edit_group_ = true
 
-[node name="Sprite" type="Sprite2D" parent="." unique_id=557455774]
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("2_xxaf0")
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=158065505]
+position = Vector2(0, 2)
+scale = Vector2(3, 3)
+sprite_frames = ExtResource("2_0n512")
+animation = &"walk"
+autoplay = "idle"
+frame_progress = 0.44504464
+script = ExtResource("3_ax8wi")
 
 [node name="Shape" type="CollisionShape2D" parent="." unique_id=1462866936]
-shape = SubResource("CircleShape2D_llgru")
+shape = SubResource("RectangleShape2D_hny28")
 
 [node name="Cooldowns" type="Node" parent="." unique_id=573484517]
 

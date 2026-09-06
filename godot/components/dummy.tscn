@@ -1,16 +1,17 @@
 [gd_scene format=3 uid="uid://btj6dn8liccai"]
 
-[ext_resource type="Texture2D" uid="uid://mm4p6mieif4v" path="res://icon.svg" id="1_svsd3"]
+[ext_resource type="Texture2D" uid="uid://cl2yhr1vj4dpj" path="res://assets/knight_statue.png" id="1_svsd3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sc5ck"]
-size = Vector2(76, 36)
+size = Vector2(45, 57)
 
 [node name="Dummy" type="CharacterBody2D" unique_id=739114351 groups=["targets"]]
 metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1262732320]
-scale = Vector2(0.6, 0.27999938)
+scale = Vector2(3, 3)
 texture = ExtResource("1_svsd3")
 
 [node name="Shape" type="CollisionShape2D" parent="." unique_id=306681969]
+position = Vector2(-4.5, -4.5)
 shape = SubResource("RectangleShape2D_sc5ck")
