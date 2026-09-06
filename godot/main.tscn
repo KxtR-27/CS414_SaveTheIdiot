@@ -1,12 +1,17 @@
 [gd_scene format=3 uid="uid://jp4phtq15x75"]
 
 [ext_resource type="PackedScene" uid="uid://8ojtytwbd10o" path="res://components/base_player/base_player.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://btj6dn8liccai" path="res://components/dummy.tscn" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://d1ks7xuvlpa75" path="res://components/base_enemy/base_enemy.tscn" id="3_h2yge"]
 
 [node name="Main" type="Node2D" unique_id=218919239]
 
-[node name="BasePlayer" parent="." unique_id=72684832 groups=["targets"] instance=ExtResource("1_0xm2m")]
+[node name="BasePlayer" parent="." unique_id=72684832 instance=ExtResource("1_0xm2m")]
 position = Vector2(216, 158)
 
 [node name="BaseEnemy" parent="." unique_id=1599695685 instance=ExtResource("3_h2yge")]
 position = Vector2(881, 356)
+speed = 5000.0
+switch_targets_when_new_target_scanned = false
+
+[node name="Dummy" parent="." unique_id=689230559 instance=ExtResource("3_1bvp3")]

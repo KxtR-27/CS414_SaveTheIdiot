@@ -2,17 +2,14 @@ class_name BaseEnemy
 extends CharacterBody2D
 
 
-@export var target: CharacterBody2D:
-	# elsewhere in the code and the engine, use `target = ...`
-	# to **trigger** this setter.
-	# in this file, you can use `self.target = ...`
-	# to **bypass** this setter.
-	set(changed):
-		print("new target:", changed)
-		target = changed
-
+@export_group("")
 @export var speed: float = 10000.0
-@export var stop_at_distance: float = 200
+
+@export_group("Targeting")
+@export var target: CharacterBody2D
+@export var stop_at_distance_to_target: float = 200
+@export var switch_targets_when_new_target_scanned: bool = true
+
 
 @onready var target_scan_area := $TargetScanArea as Area2D
 @onready var target_polling_timer := $TargetPollingTimer as Timer
@@ -37,7 +34,7 @@ func _physics_process(delta: float) -> void:
 	var distance: float = global_position.distance_to(target.global_position)
 	
 	# move toward target unless too close (for testing)
-	if distance > stop_at_distance:
+	if distance > stop_at_distance_to_target:
 		self.velocity = speed * direction * delta
 		move_and_slide()
 	else:
@@ -45,7 +42,7 @@ func _physics_process(delta: float) -> void:
 
 
 ## sorts targets by their closeness to this enemy
-func _sort_by_closeness(a: CharacterBody2D, b: CharacterBody2D) -> bool:
+func _sort_by_closeness(a: Node2D, b: Node2D) -> bool:
 	var a_dist_from_self: float = self.global_position.distance_to(a.global_position)
 	var b_dist_from_self: float = self.global_position.distance_to(b.global_position)
 	return a_dist_from_self < b_dist_from_self
@@ -72,3 +69,23 @@ func _poll_for_closest_target() -> void:
 ## poll for target at regular interval set by [code]target_polling_timer[/code]
 func _on_target_polling_timer_timeout() -> void:
 	_poll_for_closest_target()
+
+
+## change targets when a valid target enters TargetScanArea 
+func _on_target_scanned(body: Node2D) -> void:
+	# if not switching targets, return early
+	if not switch_targets_when_new_target_scanned: 
+		print("scanned a new target, but scan-switching is disabled")
+		return
+	# if already targeting the body, return early
+	elif body == target: 
+		print("already targeting the scanned body")
+		return
+	# if the body isn't a valid target, return early
+	elif not get_tree().get_nodes_in_group("targets").has(body):
+		print("scanned body is not a target")
+		return
+	# otherwise, we are scanning, the body is new to us, and it's a valid target
+	else:
+		print("scanned new target:", body.name, body) 
+		target = body

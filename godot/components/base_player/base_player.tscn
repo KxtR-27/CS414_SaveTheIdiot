@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_llgru"]
 radius = 50.0
 
-[node name="BasePlayer" type="CharacterBody2D" unique_id=72684832]
+[node name="BasePlayer" type="CharacterBody2D" unique_id=72684832 groups=["targets"]]
 script = ExtResource("1_qp1xa")
 metadata/_edit_group_ = true
 
@@ -26,7 +26,6 @@ one_shot = true
 one_shot = true
 
 [node name="Camera" type="Camera2D" parent="." unique_id=1574301220]
-enabled = false
 
 [connection signal="timeout" from="Cooldowns/Ability1Cooldown" to="." method="_on_ability_1_cooldown_timeout"]
 [connection signal="timeout" from="Cooldowns/Ability2Cooldown" to="." method="_on_ability_2_cooldown_timeout"]
