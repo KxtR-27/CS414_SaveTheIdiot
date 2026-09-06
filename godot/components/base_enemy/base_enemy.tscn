@@ -34,7 +34,8 @@ metadata/_edit_lock_ = true
 [node name="TargetScanShape" type="CollisionShape2D" parent="TargetScanArea" unique_id=2054265119]
 scale = Vector2(15.916666, 15.916666)
 shape = SubResource("CircleShape2D_n3d2o")
-debug_color = Color(0, 0.6, 0.69803923, 0.19215687)
+debug_color = Color(0, 0.6, 0.69803923, 0.03137255)
+metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="TargetPollingTimer" to="." method="_on_target_polling_timer_timeout"]
 [connection signal="body_entered" from="TargetScanArea" to="." method="_on_target_scanned"]

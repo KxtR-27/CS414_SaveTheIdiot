@@ -10,8 +10,7 @@
 position = Vector2(216, 158)
 
 [node name="BaseEnemy" parent="." unique_id=1599695685 instance=ExtResource("3_h2yge")]
-position = Vector2(881, 356)
-speed = 5000.0
-switch_targets_when_new_target_scanned = false
+position = Vector2(979, 269)
 
 [node name="Dummy" parent="." unique_id=689230559 instance=ExtResource("3_1bvp3")]
+position = Vector2(41, 441)
