@@ -7,7 +7,7 @@
 size = Vector2(48, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n3d2o"]
-radius = 26.74813
+radius = 20.0
 
 [node name="BaseEnemy" type="CharacterBody2D" unique_id=1599695685]
 scale = Vector2(0.9599999, 0.9599999)
@@ -23,14 +23,16 @@ texture = ExtResource("2_nxij1")
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_8vink")
 
-[node name="Area" type="Area2D" parent="." unique_id=1541520317]
-visible = false
-monitoring = false
+[node name="TargetScanArea" type="Area2D" parent="." unique_id=1541520317]
 monitorable = false
 metadata/_edit_lock_ = true
 
-[node name="Shape" type="CollisionShape2D" parent="Area" unique_id=2054265119]
+[node name="TargetScanShape" type="CollisionShape2D" parent="TargetScanArea" unique_id=2054265119]
 scale = Vector2(15.916666, 15.916666)
 shape = SubResource("CircleShape2D_n3d2o")
+debug_color = Color(0, 0.6, 0.69803923, 0.19215687)
 
-[connection signal="body_entered" from="Area" to="." method="_on_area_2d_body_entered"]
+[node name="TargetPollingTimer" type="Timer" parent="." unique_id=663462017]
+
+[connection signal="body_entered" from="TargetScanArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="TargetPollingTimer" to="." method="_on_target_polling_timer_timeout"]

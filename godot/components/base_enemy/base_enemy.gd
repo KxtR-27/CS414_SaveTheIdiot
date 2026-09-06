@@ -1,41 +1,37 @@
 class_name BaseEnemy
 extends CharacterBody2D
 
-# why do we need this feature? also it doesn't work.
-#enum State {
-	#LOCATING,
-	#TARGETING
-#}
+
+enum State {
+	WANDERING,
+	TARGETING,
+}
 
 
-# why do we need this feature? why export center if it's changed onready? also it doesn't work.
-#@export var center: Vector2
-@export var target: CharacterBody2D
+@export var target: CharacterBody2D:
+	# elsewhere in the code and the engine, use `target = ...`
+	# to **trigger** this setter.
+	# in this file, you can use `self.target = ...`
+	# to **bypass** this setter.
+	set(changed):
+		print("new target:", changed)
+		target = changed
+
 @export var speed: float = 10000.0
 @export var stop_at_distance: float = 200
 
-# why do we need this feature? also it doesn't work
-#@onready var state: State = State.LOCATING
-#@onready var detection_area: Area2D = $Area
+@onready var target_scan_area := $TargetScanArea as Area2D
+@onready var target_polling_timer := $TargetPollingTimer as Timer
 
 
-# are you trying to have the enemy move toward the camera while the camera tracks the player????? 
-# I am very confused. This code does produce that output. 
-# What was wrong with the way the code was before? Why do we need this feature?
-#func _ready() -> void:
-	#if (get_tree().root.get_camera_2d()):
-		#center = get_tree().root.get_camera_2d().get_screen_center_position()
-	#else:
-		#center = get_tree().root.get_visible_rect().size / 2
-
-
-# why do we need this feature? also, it doesn't work.
-#func _physics_process(delta: float) -> void:
-	#if (state == State.TARGETING):
-		#move_towards_point(target.position, delta)
-	#else:
-		#move_towards_point(center, delta)
-	#pass
+func _ready() -> void:
+	# return if target already exists
+	if target: return
+	# otherwise, check for closest
+	_poll_for_closest_target()
+	# if we still didn't find one, poll automatically until we do
+	if not target:
+		target_polling_timer.start()
 
 
 func _physics_process(delta: float) -> void:
@@ -51,10 +47,30 @@ func _physics_process(delta: float) -> void:
 		self.velocity = Vector2.ZERO
 
 
-# why do we need this feature? also, it doesn't work.
-func _on_area_2d_body_entered(_body: Node2D) -> void:
-	#if (body.is_in_group("targets") && !target):
-		#print('wow')
-		#target = body
-		#state = State.TARGETING
-	pass
+func _sort_by_closeness(a: CharacterBody2D, b: CharacterBody2D) -> bool:
+	var a_dist_from_self: float = self.global_position.distance_to(a.global_position)
+	var b_dist_from_self: float = self.global_position.distance_to(b.global_position)
+	
+	if a_dist_from_self < b_dist_from_self:
+		return true
+	return false
+
+
+func _poll_for_closest_target() -> void:
+	# run check for closest target
+	print("polling for target...")
+	var targets := get_tree().get_nodes_in_group("targets").slice(0) as Array[Node]
+	if targets.is_empty(): return
+	
+	# sort by closeness
+	targets.sort_custom(_sort_by_closeness)
+	var closest_target := targets[0] as Node2D
+	# stop polling and update target if found
+	if closest_target:
+		print("target found!", closest_target.name, closest_target)
+		target_polling_timer.stop()
+		target = closest_target
+
+
+func _on_target_polling_timer_timeout() -> void:
+	_poll_for_closest_target()
