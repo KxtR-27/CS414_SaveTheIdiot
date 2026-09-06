@@ -2,11 +2,16 @@ class_name BasePlayer
 extends CharacterBody2D
 
 
+# when you add a new ability action to the InputMap,
+# put a new value in this enum
 enum Ability {
 	ABILITY_1,
 	ABILITY_2,
 }
 
+# when you add a new ability action to the InputMap, put it here.
+# key: StringName of the action
+# value: corresponding Ability enum value
 const ABILITY_ACTION_MAP: Dictionary[String, Ability] = {
 	"ability_1": Ability.ABILITY_1,
 	"ability_2": Ability.ABILITY_2,
@@ -15,11 +20,13 @@ const ABILITY_ACTION_MAP: Dictionary[String, Ability] = {
 
 @export var speed: float = 10000
 
+# when you add a new ability, put it here
 var ability_on_cooldown: Dictionary[Ability, bool] = {
 	Ability.ABILITY_1: false, 
 	Ability.ABILITY_2: false,
 }
 
+# when you add a new ability, make a timer and link it here
 @onready var ability_timers: Dictionary[Ability, Timer] = {
 	Ability.ABILITY_1: $Cooldowns/Ability1Cooldown,
 	Ability.ABILITY_2: $Cooldowns/Ability2Cooldown,
@@ -37,11 +44,15 @@ func _physics_process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	# check pressed action to see if it's an ability
 	var ability_action: String = _get_pressed_ability(event)
 	if not ability_action: return
 
+	# get the Ability enum value
 	var ability: Ability = ABILITY_ACTION_MAP[ability_action]
+	# return early if it's on cooldown
 	if ability_on_cooldown[ability]: return
+	# otherwise, start the cooldown
 	_trigger_cooldown(ability)
 	
 	match (ability):
@@ -62,7 +73,7 @@ func _get_pressed_ability(event: InputEvent) -> String:
 	return ""
 
 
-## sets an ability's cooldown to true and starts its timer
+## sets an ability's cooldown to true and starts its cooldown timer
 func _trigger_cooldown(ability: Ability) -> void:
 	ability_on_cooldown[ability] = true
 	ability_timers[ability].start()
