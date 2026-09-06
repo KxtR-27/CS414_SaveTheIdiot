@@ -3,11 +3,11 @@ extends CharacterBody2D
 
 
 @export_group("")
-@export var speed: float = 10000.0
+@export var speed: float = 3000.0
 
 @export_group("Targeting")
 @export var target: CharacterBody2D
-@export var stop_at_distance_to_target: float = 200
+@export var stop_at_distance_to_target: float = 80
 @export var switch_targets_when_new_target_scanned: bool = true
 
 
