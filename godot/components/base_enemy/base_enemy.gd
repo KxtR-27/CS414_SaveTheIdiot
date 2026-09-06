@@ -2,12 +2,6 @@ class_name BaseEnemy
 extends CharacterBody2D
 
 
-enum State {
-	WANDERING,
-	TARGETING,
-}
-
-
 @export var target: CharacterBody2D:
 	# elsewhere in the code and the engine, use `target = ...`
 	# to **trigger** this setter.
@@ -35,11 +29,14 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# don't move without a target
 	if not target: return
 	
+	# calculate where to go to reach the target
 	var direction: Vector2 = global_position.direction_to(target.global_position)
 	var distance: float = global_position.distance_to(target.global_position)
 	
+	# move toward target unless too close (for testing)
 	if distance > stop_at_distance:
 		self.velocity = speed * direction * delta
 		move_and_slide()
@@ -47,15 +44,15 @@ func _physics_process(delta: float) -> void:
 		self.velocity = Vector2.ZERO
 
 
+## sorts targets by their closeness to this enemy
 func _sort_by_closeness(a: CharacterBody2D, b: CharacterBody2D) -> bool:
 	var a_dist_from_self: float = self.global_position.distance_to(a.global_position)
 	var b_dist_from_self: float = self.global_position.distance_to(b.global_position)
-	
-	if a_dist_from_self < b_dist_from_self:
-		return true
-	return false
+	return a_dist_from_self < b_dist_from_self
 
 
+## checks the [code]targets[/code] group, sorts by the closest target,
+## and picks that target to move toward.
 func _poll_for_closest_target() -> void:
 	# run check for closest target
 	print("polling for target...")
@@ -72,5 +69,6 @@ func _poll_for_closest_target() -> void:
 		target = closest_target
 
 
+## poll for target at regular interval set by [code]target_polling_timer[/code]
 func _on_target_polling_timer_timeout() -> void:
 	_poll_for_closest_target()
