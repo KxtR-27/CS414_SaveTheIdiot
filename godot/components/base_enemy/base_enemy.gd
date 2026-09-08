@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @export_group("")
 @export var speed: float = 3000.0
+@export var health: float = 100.0
 
 @export_group("Targeting")
 @export var target: CharacterBody2D
@@ -90,3 +91,9 @@ func _on_target_scanned(body: Node2D) -> void:
 	else:
 		print("scanned new target:", body.name, body) 
 		target = body
+
+
+func take_damage(amount : float) -> void:
+	self.health -= amount
+	if self.health <= 0.0:
+		self.queue_free()
