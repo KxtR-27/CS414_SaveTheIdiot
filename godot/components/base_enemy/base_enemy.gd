@@ -95,5 +95,11 @@ func _on_target_scanned(body: Node2D) -> void:
 
 func take_damage(amount : float) -> void:
 	self.health -= amount
+	
+	#update health bar
+	var progress_bar : ProgressBar = $Health/ProgressBar
+	progress_bar.value = self.health
+	
+	#queue_free() if enemy runs out of health
 	if self.health <= 0.0:
 		self.queue_free()
