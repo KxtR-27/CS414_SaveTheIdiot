@@ -7,6 +7,7 @@ extends CharacterBody2D
 enum Ability {
 	ABILITY_1,
 	ABILITY_2,
+	ATTACK,
 }
 
 # when you add a new ability action to the InputMap, put it here.
@@ -15,6 +16,7 @@ enum Ability {
 const ABILITY_ACTION_MAP: Dictionary[String, Ability] = {
 	"ability_1": Ability.ABILITY_1,
 	"ability_2": Ability.ABILITY_2,
+	"attack" : Ability.ATTACK,
 }
 
 
@@ -24,12 +26,14 @@ const ABILITY_ACTION_MAP: Dictionary[String, Ability] = {
 var ability_on_cooldown: Dictionary[Ability, bool] = {
 	Ability.ABILITY_1: false, 
 	Ability.ABILITY_2: false,
+	Ability.ATTACK: false,
 }
 
 # when you add a new ability, make a timer and link it here
 @onready var ability_timers: Dictionary[Ability, Timer] = {
 	Ability.ABILITY_1: $Cooldowns/Ability1Cooldown,
 	Ability.ABILITY_2: $Cooldowns/Ability2Cooldown,
+	Ability.ATTACK: $Cooldowns/AttackCooldown,
 }
 
 
@@ -60,6 +64,14 @@ func _input(event: InputEvent) -> void:
 			pass # do the thing
 		Ability.ABILITY_2:
 			pass # do the thing
+		Ability.ATTACK:
+			#play attack animation
+			var sprite : AnimatedSprite2D = $Sprite
+			sprite.play("attack")
+			
+			#use animationplayer to turn hitbox on and off
+			var sword_animator : AnimationPlayer = $SwordHitboxAnimator
+			sword_animator.play("attack")
 
 
 ## loops through all actions in ABILITY_ACTION_MAP.
@@ -85,3 +97,7 @@ func _on_ability_1_cooldown_timeout() -> void:
 
 func _on_ability_2_cooldown_timeout() -> void:
 	ability_on_cooldown[Ability.ABILITY_2] = false
+
+
+func _on_attack_cooldown_timeout() -> void:
+	ability_on_cooldown[Ability.ATTACK] = false

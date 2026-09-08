@@ -16,6 +16,7 @@ extends CharacterBody2D
 
 
 func _ready() -> void:
+	add_to_group("enemies")
 	# return if target already exists
 	if target: return
 	# otherwise, check for closest

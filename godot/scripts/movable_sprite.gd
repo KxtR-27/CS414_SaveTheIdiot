@@ -10,6 +10,11 @@ func _process(_delta: float) -> void:
 	
 	var walking := self.animation == "walk" and self.is_playing()
 	var idling := self.animation == "idle" and self.is_playing()
+	var attacking := self.animation == "attack" and self.is_playing()
+	
+	#prevents attacking animation from being interrupted
+	if attacking: 
+		return
 	
 	if not moving and not idling:
 		play("idle")

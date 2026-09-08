@@ -1,7 +1,36 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://dal0adb4yewow"]
 
+[ext_resource type="Texture2D" uid="uid://bh6kcwtn40fqp" path="res://assets/spritesheets/swordsman_attack.png" id="1_l2ji4"]
 [ext_resource type="Texture2D" uid="uid://crkrl6ki03uvv" path="res://assets/spritesheets/swordsman_idle.png" id="1_lprs0"]
 [ext_resource type="Texture2D" uid="uid://c15erjj7bwnu3" path="res://assets/spritesheets/swordsman_walk.png" id="2_l2ji4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdyrc"]
+atlas = ExtResource("1_l2ji4")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkww2"]
+atlas = ExtResource("1_l2ji4")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0l1wj"]
+atlas = ExtResource("1_l2ji4")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7b0e"]
+atlas = ExtResource("1_l2ji4")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqmbm"]
+atlas = ExtResource("1_l2ji4")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdlto"]
+atlas = ExtResource("1_l2ji4")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmbda"]
+atlas = ExtResource("1_l2ji4")
+region = Rect2(600, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhref"]
 atlas = ExtResource("1_lprs0")
@@ -61,6 +90,32 @@ region = Rect2(700, 0, 100, 100)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdyrc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkww2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0l1wj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7b0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqmbm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdlto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmbda")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bhref")
