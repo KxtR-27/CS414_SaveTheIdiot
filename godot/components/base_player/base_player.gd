@@ -1,6 +1,13 @@
 class_name BasePlayer
 extends CharacterBody2D
 
+@export_group("")
+@export var speed: float = 10000
+
+@export_group("Components")
+@export var health_component : HealthComponent
+@export var damage_component : DamageComponent
+
 
 # when you add a new ability action to the InputMap,
 # put a new value in this enum
@@ -19,8 +26,6 @@ const ABILITY_ACTION_MAP: Dictionary[String, Ability] = {
 	"attack" : Ability.ATTACK,
 }
 
-
-@export var speed: float = 10000
 
 # when you add a new ability, put it here
 var ability_on_cooldown: Dictionary[Ability, bool] = {
@@ -72,6 +77,7 @@ func _input(event: InputEvent) -> void:
 			#use animationplayer to turn hitbox on and off
 			var sword_animator : AnimationPlayer = $SwordHitboxAnimator
 			sword_animator.play("attack")
+			
 
 
 ## loops through all actions in ABILITY_ACTION_MAP.
@@ -101,3 +107,15 @@ func _on_ability_2_cooldown_timeout() -> void:
 
 func _on_attack_cooldown_timeout() -> void:
 	ability_on_cooldown[Ability.ATTACK] = false
+
+
+func _on_attack_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemies"):
+		var enemy : BaseEnemy = body
+		damage_component.deal_damage(25, enemy)
+	pass # Replace with function body.
+
+
+func _on_health_component_died() -> void:
+	self.queue_free()
+	pass # Replace with function body.

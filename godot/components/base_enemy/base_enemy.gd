@@ -6,6 +6,10 @@ extends CharacterBody2D
 @export var speed: float = 3000.0
 @export var health: float = 100.0
 
+@export_group("Components")
+@export var health_component: HealthComponent
+@export var damage_component: DamageComponent
+
 @export_group("Targeting")
 @export var target: CharacterBody2D
 @export var stop_at_distance_to_target: float = 80
@@ -93,13 +97,18 @@ func _on_target_scanned(body: Node2D) -> void:
 		target = body
 
 
-func take_damage(amount : float) -> void:
-	self.health -= amount
-	
-	#update health bar
-	var progress_bar : ProgressBar = $Health/ProgressBar
-	progress_bar.value = self.health
-	
-	#queue_free() if enemy runs out of health
-	if self.health <= 0.0:
-		self.queue_free()
+#func take_damage(amount : float) -> void:
+	#self.health -= amount
+	#
+	##update health bar
+	#var progress_bar : ProgressBar = $Health/ProgressBar
+	#progress_bar.value = self.health
+	#
+	##queue_free() if enemy runs out of health
+	#if self.health <= 0.0:
+		#self.queue_free()
+
+
+func _on_health_component_died() -> void:
+	self.queue_free()
+	pass # Replace with function body.

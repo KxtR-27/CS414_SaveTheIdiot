@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://bw1quqx726ye3" path="res://components/base_enemy/base_enemy.gd" id="1_72wxb"]
 [ext_resource type="SpriteFrames" uid="uid://dgiwgs50l3elg" path="res://resources/orc_spriteframes.tres" id="2_mvtnl"]
 [ext_resource type="Script" uid="uid://cg3h6gbsrxp6g" path="res://scripts/movable_sprite.gd" id="3_hny28"]
+[ext_resource type="PackedScene" uid="uid://dgxdmoiktki2o" path="res://components/health_component/health_component.tscn" id="4_hny28"]
+[ext_resource type="PackedScene" uid="uid://ddl42npad8oop" path="res://components/damage_component/damage_component.tscn" id="5_msunv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_svsd3"]
 radius = 17.0
@@ -17,9 +19,11 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_udkgg"]
 bg_color = Color(1, 0, 0, 1)
 
-[node name="BaseEnemy" type="CharacterBody2D" unique_id=1599695685]
+[node name="BaseEnemy" type="CharacterBody2D" unique_id=1599695685 node_paths=PackedStringArray("health_component", "damage_component")]
 collision_layer = 2
 script = ExtResource("1_72wxb")
+health_component = NodePath("HealthComponent")
+damage_component = NodePath("Components/DamageComponent")
 metadata/_edit_group_ = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=308880726]
@@ -46,6 +50,7 @@ debug_color = Color(0, 0.6, 0.69803923, 0.03137255)
 metadata/_edit_lock_ = true
 
 [node name="Health" type="Control" parent="." unique_id=1759570600]
+visible = false
 custom_minimum_size = Vector2(50, 5)
 layout_mode = 3
 anchors_preset = 0
@@ -64,5 +69,14 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_udkgg")
 value = 100.0
 show_percentage = false
 
+[node name="Components" type="Node" parent="." unique_id=438742657]
+
+[node name="DamageComponent" parent="Components" unique_id=1171977157 instance=ExtResource("5_msunv")]
+
+[node name="HealthComponent" parent="." unique_id=1224115467 instance=ExtResource("4_hny28")]
+offset_top = -35.0
+offset_bottom = -35.0
+
 [connection signal="timeout" from="TargetPollingTimer" to="." method="_on_target_polling_timer_timeout"]
 [connection signal="body_entered" from="TargetScanArea" to="." method="_on_target_scanned"]
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
