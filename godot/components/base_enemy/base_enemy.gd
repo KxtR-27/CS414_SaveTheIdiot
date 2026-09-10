@@ -21,7 +21,6 @@ extends CharacterBody2D
 
 
 func _ready() -> void:
-	add_to_group("enemies")
 	# return if target already exists
 	if target: return
 	# otherwise, check for closest
@@ -59,7 +58,7 @@ func _sort_by_closeness(a: Node2D, b: Node2D) -> bool:
 func _poll_for_closest_target() -> void:
 	# run check for closest target
 	print("polling for target...")
-	var targets := get_tree().get_nodes_in_group("targets").slice(0) as Array[Node]
+	var targets := get_tree().get_nodes_in_group("enemy_targets").slice(0) as Array[Node]
 	if targets.is_empty(): return
 	
 	# sort by closeness

@@ -19,7 +19,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AttackHitbox:monitoring")
+tracks/0/path = NodePath("AttackHurtbox:monitoring")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,7 +35,7 @@ length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AttackHitbox:monitoring")
+tracks/0/path = NodePath("AttackHurtbox:monitoring")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -51,7 +51,7 @@ _data = {
 &"attack": SubResource("Animation_sd7qx")
 }
 
-[node name="BasePlayer" type="CharacterBody2D" unique_id=72684832 node_paths=PackedStringArray("health_component", "damage_component") groups=["targets"]]
+[node name="BasePlayer" type="CharacterBody2D" unique_id=72684832 node_paths=PackedStringArray("health_component", "damage_component") groups=["enemies", "players"]]
 script = ExtResource("1_qp1xa")
 health_component = NodePath("HealthComponent")
 damage_component = NodePath("Components/DamageComponent")
@@ -81,13 +81,13 @@ one_shot = true
 
 [node name="Camera" type="Camera2D" parent="." unique_id=1574301220]
 
-[node name="AttackHitbox" type="Area2D" parent="." unique_id=1658078459]
+[node name="AttackHurtbox" type="Area2D" parent="." unique_id=1658078459]
 position = Vector2(0, 10)
 collision_mask = 2
 monitoring = false
 script = ExtResource("4_ax8wi")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=567730645]
+[node name="Shape" type="CollisionShape2D" parent="AttackHurtbox" unique_id=567730645]
 shape = SubResource("RectangleShape2D_bhref")
 
 [node name="SwordHitboxAnimator" type="AnimationPlayer" parent="." unique_id=469004323]
@@ -104,6 +104,6 @@ offset_bottom = -35.0
 [connection signal="timeout" from="Cooldowns/Ability1Cooldown" to="." method="_on_ability_1_cooldown_timeout"]
 [connection signal="timeout" from="Cooldowns/Ability2Cooldown" to="." method="_on_ability_2_cooldown_timeout"]
 [connection signal="timeout" from="Cooldowns/AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
-[connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]
-[connection signal="body_entered" from="AttackHitbox" to="AttackHitbox" method="_on_body_entered"]
+[connection signal="body_entered" from="AttackHurtbox" to="." method="_on_attack_hitbox_body_entered"]
+[connection signal="body_entered" from="AttackHurtbox" to="AttackHurtbox" method="_on_body_entered"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

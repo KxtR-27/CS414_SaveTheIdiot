@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="SaveTheIdiot"
+config/name="VIP Wave Survival"
 run/main_scene="uid://jp4phtq15x75"
 config/features=PackedStringArray("4.8", "Forward Plus")
 config/icon="res://icon.svg"
@@ -30,7 +30,10 @@ window/stretch/aspect="expand"
 
 [global_group]
 
-targets=""
+players=""
+vip=""
+enemies=""
+enemy_targets=""
 
 [input]
 
