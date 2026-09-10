@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://kk8m7xmlonb5" path="res://components/base_player/base_player.gd" id="1_qp1xa"]
 [ext_resource type="SpriteFrames" uid="uid://dal0adb4yewow" path="res://resources/swordsman_spriteframes.tres" id="2_0n512"]
 [ext_resource type="Script" uid="uid://cg3h6gbsrxp6g" path="res://scripts/movable_sprite.gd" id="3_ax8wi"]
-[ext_resource type="Script" uid="uid://c0bwy6gvbbob3" path="res://scripts/attack_hitbox.gd" id="4_ax8wi"]
 [ext_resource type="PackedScene" uid="uid://dgxdmoiktki2o" path="res://components/health_component/health_component.tscn" id="5_2q2f4"]
 [ext_resource type="PackedScene" uid="uid://ddl42npad8oop" path="res://components/damage_component/damage_component.tscn" id="6_sd7qx"]
 
@@ -53,6 +52,7 @@ _data = {
 
 [node name="BasePlayer" type="CharacterBody2D" unique_id=72684832 node_paths=PackedStringArray("health_component", "damage_component") groups=["enemy_targets", "players"]]
 script = ExtResource("1_qp1xa")
+speed = 10000.0
 health_component = NodePath("HealthComponent")
 damage_component = NodePath("Components/DamageComponent")
 
@@ -85,7 +85,6 @@ one_shot = true
 position = Vector2(0, 10)
 collision_mask = 2
 monitoring = false
-script = ExtResource("4_ax8wi")
 
 [node name="Shape" type="CollisionShape2D" parent="AttackHurtbox" unique_id=567730645]
 shape = SubResource("RectangleShape2D_bhref")

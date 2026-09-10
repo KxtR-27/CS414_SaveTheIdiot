@@ -1,12 +1,5 @@
 class_name BasePlayer
-extends CharacterBody2D
-
-@export_group("")
-@export var speed: float = 10000
-
-@export_group("Components")
-@export var health_component : HealthComponent
-@export var damage_component : DamageComponent
+extends BaseCharacter
 
 
 # when you add a new ability action to the InputMap,
@@ -107,7 +100,7 @@ func _on_attack_cooldown_timeout() -> void:
 
 func _on_attack_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
-		var enemy : BaseEnemy = body
+		var enemy : BaseNPC = body
 		damage_component.deal_damage(25, enemy)
 	pass # Replace with function body.
 

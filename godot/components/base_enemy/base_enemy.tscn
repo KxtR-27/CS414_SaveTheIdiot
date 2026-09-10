@@ -22,6 +22,7 @@ bg_color = Color(1, 0, 0, 1)
 [node name="BaseEnemy" type="CharacterBody2D" unique_id=1599695685 node_paths=PackedStringArray("health_component", "damage_component") groups=["enemies"]]
 collision_layer = 2
 script = ExtResource("1_72wxb")
+farthest_flee_distance = 500.0
 health_component = NodePath("HealthComponent")
 damage_component = NodePath("Components/DamageComponent")
 metadata/_edit_group_ = true
