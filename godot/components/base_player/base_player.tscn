@@ -51,7 +51,7 @@ _data = {
 &"attack": SubResource("Animation_sd7qx")
 }
 
-[node name="BasePlayer" type="CharacterBody2D" unique_id=72684832 node_paths=PackedStringArray("health_component", "damage_component") groups=["enemies", "players"]]
+[node name="BasePlayer" type="CharacterBody2D" unique_id=72684832 node_paths=PackedStringArray("health_component", "damage_component") groups=["enemy_targets", "players"]]
 script = ExtResource("1_qp1xa")
 health_component = NodePath("HealthComponent")
 damage_component = NodePath("Components/DamageComponent")

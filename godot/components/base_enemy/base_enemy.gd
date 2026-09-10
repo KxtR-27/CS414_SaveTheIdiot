@@ -87,7 +87,7 @@ func _on_target_scanned(body: Node2D) -> void:
 		print("already targeting the scanned body")
 		return
 	# if the body isn't a valid target, return early
-	elif not get_tree().get_nodes_in_group("targets").has(body):
+	elif not get_tree().get_nodes_in_group("enemy_targets").has(body):
 		print("scanned body is not a target")
 		return
 	# otherwise, we are scanning, the body is new to us, and it's a valid target
