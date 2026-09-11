@@ -4,14 +4,12 @@
 [ext_resource type="SpriteFrames" uid="uid://dgiwgs50l3elg" path="res://resources/orc_spriteframes.tres" id="2_mvtnl"]
 [ext_resource type="Script" uid="uid://cg3h6gbsrxp6g" path="res://scripts/movable_sprite.gd" id="3_hny28"]
 [ext_resource type="PackedScene" uid="uid://dgxdmoiktki2o" path="res://components/health_component/health_component.tscn" id="4_hny28"]
+[ext_resource type="PackedScene" uid="uid://jcob8jmp4huw" path="res://components/target_scanner/target_scanner.tscn" id="4_vq6v8"]
 [ext_resource type="PackedScene" uid="uid://ddl42npad8oop" path="res://components/damage_component/damage_component.tscn" id="5_msunv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_svsd3"]
 radius = 17.0
 height = 46.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_n3d2o"]
-radius = 20.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llgru"]
 bg_color = Color(0, 0, 0, 1)
@@ -22,7 +20,6 @@ bg_color = Color(1, 0, 0, 1)
 [node name="BaseEnemy" type="CharacterBody2D" unique_id=1599695685 node_paths=PackedStringArray("health_component", "damage_component") groups=["enemies"]]
 collision_layer = 2
 script = ExtResource("1_72wxb")
-farthest_flee_distance = 500.0
 health_component = NodePath("HealthComponent")
 damage_component = NodePath("Components/DamageComponent")
 metadata/_edit_group_ = true
@@ -33,22 +30,16 @@ scale = Vector2(3, 3)
 sprite_frames = ExtResource("2_mvtnl")
 animation = &"walk"
 script = ExtResource("3_hny28")
+metadata/_edit_lock_ = true
 
 [node name="Shape" type="CollisionShape2D" parent="." unique_id=2032780794]
 shape = SubResource("CapsuleShape2D_svsd3")
 
 [node name="TargetPollingTimer" type="Timer" parent="." unique_id=663462017]
 
-[node name="TargetScanArea" type="Area2D" parent="." unique_id=1541520317]
-collision_layer = 2
-monitorable = false
-metadata/_edit_lock_ = true
-
-[node name="TargetScanShape" type="CollisionShape2D" parent="TargetScanArea" unique_id=2054265119]
-scale = Vector2(15.916666, 15.916666)
-shape = SubResource("CircleShape2D_n3d2o")
-debug_color = Color(0, 0.6, 0.69803923, 0.03137255)
-metadata/_edit_lock_ = true
+[node name="TargetScanner" parent="." unique_id=1244760111 instance=ExtResource("4_vq6v8")]
+radius_tool = 15.0
+scan_groups = 2
 
 [node name="Health" type="Control" parent="." unique_id=1759570600]
 visible = false
@@ -79,5 +70,5 @@ offset_top = -35.0
 offset_bottom = -35.0
 
 [connection signal="timeout" from="TargetPollingTimer" to="." method="_on_target_polling_timer_timeout"]
-[connection signal="body_entered" from="TargetScanArea" to="." method="_on_target_scanned"]
+[connection signal="target_scanned" from="TargetScanner" to="." method="_on_target_scanned"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

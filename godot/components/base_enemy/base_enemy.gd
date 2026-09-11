@@ -1,9 +1,6 @@
 class_name BaseEnemy
 extends BaseNPC
 
-@export var switch_targets_when_new_target_scanned: bool = true
-
-@onready var target_scan_area := $TargetScanArea as Area2D
 @onready var target_polling_timer := $TargetPollingTimer as Timer
 
 func _ready() -> void:
@@ -43,27 +40,7 @@ func _poll_for_closest_target() -> void:
 
 ## poll for target at regular interval set by [code]target_polling_timer[/code]
 func _on_target_polling_timer_timeout() -> void:
-	_poll_for_closest_target()
-
-
-## change targets when a valid target enters TargetScanArea 
-func _on_target_scanned(body: Node2D) -> void:
-	# if not switching targets, return early
-	if not switch_targets_when_new_target_scanned: 
-		print("scanned a new target_to_follow, but scan-switching is disabled")
-		return
-	# if already targeting the body, return early
-	elif body == target_to_follow: 
-		print("already targeting the scanned body")
-		return
-	# if the body isn't a valid target, return early
-	elif not get_tree().get_nodes_in_group("enemy_targets").has(body):
-		print("scanned body is not a target_to_follow")
-		return
-	# otherwise, we are scanning, the body is new to us, and it's a valid target
-	else:
-		print("scanned new target_to_follow:", body.name, body) 
-		target_to_follow = body
+	_poll_for_closest_target() 
 
 
 #func take_damage(amount : float) -> void:
@@ -81,3 +58,12 @@ func _on_target_scanned(body: Node2D) -> void:
 func _on_health_component_died() -> void:
 	self.queue_free()
 	pass # Replace with function body.
+
+
+### change targets when a valid target enters TargetScanner
+func _on_target_scanned(character: BaseCharacter, flee: bool) -> void:
+	print("accepting scanned target")
+	if flee:
+		target_to_flee_from = character
+	else:
+		target_to_follow = character

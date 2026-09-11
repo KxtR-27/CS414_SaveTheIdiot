@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://q8gp3srvu57s"]
+
+[ext_resource type="Script" uid="uid://dp5tlxremg3aj" path="res://components/base_vip/base_vip.gd" id="1_kb0sa"]
+[ext_resource type="SpriteFrames" uid="uid://yvri5o1l0rs6" path="res://resources/priest_spriteframes.tres" id="2_rrppm"]
+[ext_resource type="Script" uid="uid://cg3h6gbsrxp6g" path="res://scripts/movable_sprite.gd" id="3_24cib"]
+[ext_resource type="PackedScene" uid="uid://jcob8jmp4huw" path="res://components/target_scanner/target_scanner.tscn" id="4_pb8p3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kek77"]
+radius = 18.0
+height = 56.0
+
+[node name="BaseVIP" type="CharacterBody2D" unique_id=1927010828 groups=["enemy_targets", "vip"]]
+script = ExtResource("1_kb0sa")
+farthest_flee_distance = 500.0
+metadata/_custom_type_script = "uid://lt2oeslpqb6n"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1611327213]
+position = Vector2(0, 6)
+scale = Vector2(3, 3)
+sprite_frames = ExtResource("2_rrppm")
+animation = &"idle"
+script = ExtResource("3_24cib")
+metadata/_edit_lock_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="." unique_id=107678842]
+shape = SubResource("CapsuleShape2D_kek77")
+
+[node name="TargetScanner" parent="." unique_id=1244760111 instance=ExtResource("4_pb8p3")]
+scan_groups = 1
+scan_purpose = "Flee"
+
+[connection signal="target_scanned" from="TargetScanner" to="." method="_on_target_scanned"]

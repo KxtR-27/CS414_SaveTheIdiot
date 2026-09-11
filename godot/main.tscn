@@ -3,6 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://8ojtytwbd10o" path="res://components/base_player/base_player.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://btj6dn8liccai" path="res://components/statue.tscn" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://d1ks7xuvlpa75" path="res://components/base_enemy/base_enemy.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://dp5tlxremg3aj" path="res://components/base_vip/base_vip.gd" id="4_7mycd"]
+[ext_resource type="SpriteFrames" uid="uid://yvri5o1l0rs6" path="res://resources/priest_spriteframes.tres" id="5_272bh"]
+[ext_resource type="Script" uid="uid://cg3h6gbsrxp6g" path="res://scripts/movable_sprite.gd" id="6_5vw27"]
+[ext_resource type="PackedScene" uid="uid://jcob8jmp4huw" path="res://components/target_scanner/target_scanner.tscn" id="7_272bh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kek77"]
+radius = 18.0
+height = 56.0
 
 [node name="Main" type="Node2D" unique_id=218919239]
 
@@ -11,6 +19,29 @@ position = Vector2(216, 158)
 
 [node name="BaseEnemy" parent="." unique_id=1599695685 instance=ExtResource("3_h2yge")]
 position = Vector2(979, 269)
+collision_layer = 1
 
 [node name="Statue" parent="." unique_id=739114351 instance=ExtResource("3_1bvp3")]
 position = Vector2(-93, 365)
+
+[node name="BaseVIP" type="CharacterBody2D" parent="." unique_id=787600822 groups=["enemy_targets", "vip"]]
+script = ExtResource("4_7mycd")
+farthest_flee_distance = 500.0
+metadata/_custom_type_script = "uid://lt2oeslpqb6n"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="BaseVIP" unique_id=851415431]
+position = Vector2(0, 6)
+scale = Vector2(3, 3)
+sprite_frames = ExtResource("5_272bh")
+animation = &"idle"
+script = ExtResource("6_5vw27")
+metadata/_edit_lock_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="BaseVIP" unique_id=578634812]
+shape = SubResource("CapsuleShape2D_kek77")
+
+[node name="TargetScanner" parent="BaseVIP" unique_id=1244760111 instance=ExtResource("7_272bh")]
+scan_groups = 1
+scan_purpose = "Flee"
+
+[connection signal="target_scanned" from="BaseVIP/TargetScanner" to="BaseVIP" method="_on_target_scanned"]
