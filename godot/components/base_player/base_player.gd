@@ -10,6 +10,15 @@ enum Ability {
 	ATTACK,
 }
 
+#preload test ability to use in current_selected_abilities
+var test_ability : BaseAbility = preload("res://scripts/abilities/test_ability.gd").new()
+
+#this maps ability enums to the desired ability to be run
+var current_selected_abilities : Dictionary[Ability, BaseAbility] = {
+	Ability.ABILITY_1 : BaseAbility.new(),
+	Ability.ABILITY_2 : test_ability
+}
+
 # when you add a new ability action to the InputMap, put it here.
 # key: StringName of the action
 # value: corresponding Ability enum value
@@ -19,6 +28,8 @@ const ABILITY_ACTION_MAP: Dictionary[String, Ability] = {
 	"attack" : Ability.ATTACK,
 }
 
+
+var ability_creator : AbilityCreator = AbilityCreator
 
 # when you add a new ability, put it here
 var ability_on_cooldown: Dictionary[Ability, bool] = {
@@ -55,9 +66,13 @@ func _input(event: InputEvent) -> void:
 	
 	match (ability):
 		Ability.ABILITY_1:
-			pass # do the thing
+			ability_creator.run_ability(
+				current_selected_abilities[Ability.ABILITY_1]
+			)
 		Ability.ABILITY_2:
-			pass # do the thing
+			ability_creator.run_ability(
+				current_selected_abilities[Ability.ABILITY_2]
+			)
 		Ability.ATTACK:
 			#play attack animation
 			var sprite : AnimatedSprite2D = $Sprite
