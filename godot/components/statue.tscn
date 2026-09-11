@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://btj6dn8liccai"]
 
-[ext_resource type="Script" uid="uid://lt2oeslpqb6n" path="res://scripts/base_npc.gd" id="1_ec6gv"]
+[ext_resource type="Script" uid="uid://dcjr55twqlhey" path="res://scripts/dummy_character.gd" id="1_ec6gv"]
 [ext_resource type="Texture2D" uid="uid://cl2yhr1vj4dpj" path="res://assets/knight_statue.png" id="1_svsd3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0n512"]
@@ -9,7 +9,6 @@ height = 42.0
 
 [node name="Statue" type="CharacterBody2D" unique_id=239526835 groups=["enemy_targets"]]
 script = ExtResource("1_ec6gv")
-metadata/_custom_type_script = "uid://lt2oeslpqb6n"
 metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1262732320]
