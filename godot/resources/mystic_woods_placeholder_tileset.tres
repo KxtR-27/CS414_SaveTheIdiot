@@ -1,0 +1,19 @@
+[gd_resource type="TileSet" format=3 uid="uid://x1d1rnuuvue3"]
+
+[ext_resource type="Texture2D" uid="uid://cluednx2dsduv" path="res://assets/tilesets/mystic_woods_placeholder/grass.png" id="1_qor4o"]
+[ext_resource type="Texture2D" uid="uid://rcd8laa86l1x" path="res://assets/tilesets/mystic_woods_placeholder/decor_16x16.png" id="2_femen"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_veixt"]
+texture = ExtResource("1_qor4o")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ycb8y"]
+texture = ExtResource("2_femen")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_veixt")
+sources/1 = SubResource("TileSetAtlasSource_ycb8y")
