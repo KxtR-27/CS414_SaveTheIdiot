@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://jp4phtq15x75"]
 
 [ext_resource type="PackedScene" uid="uid://8ojtytwbd10o" path="res://components/base_player/base_player.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://cp0mjy2pkwpr2" path="res://scripts/ability_creator.gd" id="1_7mycd"]
 [ext_resource type="TileSet" uid="uid://x1d1rnuuvue3" path="res://resources/mystic_woods_placeholder_tileset.tres" id="1_lquwl"]
 [ext_resource type="PackedScene" uid="uid://btj6dn8liccai" path="res://components/statue.tscn" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://d1ks7xuvlpa75" path="res://components/base_enemy/base_enemy.tscn" id="3_h2yge"]
@@ -24,3 +25,8 @@ collision_layer = 1
 
 [node name="Statue" parent="." unique_id=239526835 instance=ExtResource("3_1bvp3")]
 position = Vector2(68, 352)
+
+[node name="AbilityCreator" type="Node2D" parent="." unique_id=974074343]
+script = ExtResource("1_7mycd")
+
+[connection signal="ability_used" from="BasePlayer" to="AbilityCreator" method="_on_base_player_ability_used"]

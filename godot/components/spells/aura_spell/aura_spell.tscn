@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cl5o61sotabt5"]
+
+[ext_resource type="Script" uid="uid://dxg83om25whh6" path="res://components/spells/aura_spell/aura_spell.gd" id="1_v4gr5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_llgru"]
+radius = 100.0
+
+[node name="AuraSpell" type="Node2D" unique_id=821474778 node_paths=PackedStringArray("hitbox", "remote_transform", "tick_timer", "lifetime_timer")]
+script = ExtResource("1_v4gr5")
+hitbox = NodePath("Area2D")
+remote_transform = NodePath("RemoteTransform2D")
+tick_timer = NodePath("Area2D/TickTimer")
+lifetime_timer = NodePath("Area2D/LifetimeTimer")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1468640870]
+collision_mask = 3
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=21235292]
+shape = SubResource("CircleShape2D_llgru")
+debug_color = Color(0.8, 0.043137256, 1, 0.11764706)
+
+[node name="TickTimer" type="Timer" parent="Area2D" unique_id=137060940]
+wait_time = 0.5
+
+[node name="LifetimeTimer" type="Timer" parent="Area2D" unique_id=1549324633]
+wait_time = 3.0
+one_shot = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="." unique_id=311111872]
+remote_path = NodePath("..")
+update_rotation = false
+update_scale = false
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Area2D/TickTimer" to="." method="_on_tick_timer_timeout"]
+[connection signal="timeout" from="Area2D/LifetimeTimer" to="." method="_on_lifetime_timer_timeout"]

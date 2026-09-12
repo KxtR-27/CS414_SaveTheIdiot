@@ -1,4 +1,4 @@
-class_name BaseSpell extends Resource
+class_name BaseSpell extends Node2D
 
-func run(ability : BaseAbility) -> void:
-	print(ability.ability_name)
+func run(_ability : BaseAbility, _caster : BaseCharacter) -> void:
+	pass #implement functionality here

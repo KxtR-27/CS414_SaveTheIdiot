@@ -1,7 +1,6 @@
 class_name BasePlayer
 extends BaseCharacter
 
-
 # when you add a new ability action to the InputMap,
 # put a new value in this enum
 enum Ability {
@@ -10,12 +9,15 @@ enum Ability {
 	ATTACK,
 }
 
+signal ability_used(ability : BaseAbility)
+
 #preload test ability to use in current_selected_abilities
 var test_ability : BaseAbility = preload("res://scripts/abilities/test_ability.gd").new()
+var aura_ability : BaseAbility = preload("res://resources/abilities/damaging_aura.tres")
 
 #this maps ability enums to the desired ability to be run
 var current_selected_abilities : Dictionary[Ability, BaseAbility] = {
-	Ability.ABILITY_1 : BaseAbility.new(),
+	Ability.ABILITY_1 : aura_ability,
 	Ability.ABILITY_2 : test_ability
 }
 
@@ -27,9 +29,6 @@ const ABILITY_ACTION_MAP: Dictionary[String, Ability] = {
 	"ability_2": Ability.ABILITY_2,
 	"attack" : Ability.ATTACK,
 }
-
-
-var ability_creator : AbilityCreator = AbilityCreator
 
 # when you add a new ability, put it here
 var ability_on_cooldown: Dictionary[Ability, bool] = {
@@ -66,13 +65,11 @@ func _input(event: InputEvent) -> void:
 	
 	match (ability):
 		Ability.ABILITY_1:
-			ability_creator.run_ability(
-				current_selected_abilities[Ability.ABILITY_1]
-			)
+			var current_ability : BaseAbility = current_selected_abilities[Ability.ABILITY_1]
+			ability_used.emit(current_ability, self)
 		Ability.ABILITY_2:
-			ability_creator.run_ability(
-				current_selected_abilities[Ability.ABILITY_2]
-			)
+			var current_ability : BaseAbility = current_selected_abilities[Ability.ABILITY_2]
+			ability_used.emit(current_ability, self)
 		Ability.ATTACK:
 			#play attack animation
 			var sprite : AnimatedSprite2D = $Sprite

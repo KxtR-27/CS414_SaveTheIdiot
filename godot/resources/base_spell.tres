@@ -1,6 +1,0 @@
-[gd_resource type="Resource" script_class="BaseSpell" format=3 uid="uid://bl8y4pj0bn263"]
-
-[ext_resource type="Script" uid="uid://el1ectou60m7" path="res://scripts/base_spell.gd" id="1_gfrci"]
-
-[resource]
-script = ExtResource("1_gfrci")

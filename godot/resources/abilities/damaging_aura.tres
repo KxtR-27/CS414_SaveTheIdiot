@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BaseAbility" format=3 uid="uid://cpsvhgd4l8qsw"]
+
+[ext_resource type="Script" uid="uid://c1qvpiklfsumt" path="res://scripts/base_ability.gd" id="1_4nuw5"]
+
+[resource]
+script = ExtResource("1_4nuw5")
+ability_name = "Damaging Aura"
+ability_type = "aura"
+metadata/_custom_type_script = "uid://c1qvpiklfsumt"
