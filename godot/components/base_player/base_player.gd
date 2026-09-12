@@ -11,8 +11,8 @@ enum Ability {
 
 signal ability_used(ability : BaseAbility)
 
-#preload test ability to use in current_selected_abilities
-var test_ability : BaseAbility = preload("res://scripts/abilities/test_ability.gd").new()
+#preload abilities to use in current_selected_abilities
+var test_ability : BaseAbility = preload("res://resources/abilities/test_ability.tres")
 var aura_ability : BaseAbility = preload("res://resources/abilities/damaging_aura.tres")
 
 #this maps ability enums to the desired ability to be run
@@ -78,7 +78,6 @@ func _input(event: InputEvent) -> void:
 			#use animationplayer to turn hitbox on and off
 			var sword_animator : AnimationPlayer = $SwordHitboxAnimator
 			sword_animator.play("attack")
-			
 
 
 ## loops through all actions in ABILITY_ACTION_MAP.

@@ -10,9 +10,12 @@ func run_ability(ability : BaseAbility, caster : BaseCharacter) -> void:
 			
 			#run the spell with current ability parameters and caster
 			new_aura_spell.run(ability, caster)
-		
 		"test":
-			print("test ability used")
+			var test_spell_node : PackedScene = load("res://components/spells/test_spell/test_spell.tscn")
+			var new_test_spell : BaseSpell = test_spell_node.instantiate()
+			add_child(new_test_spell)
+			
+			new_test_spell.run(ability, caster)
 
 
 func _on_base_player_ability_used(ability: BaseAbility, caster : BaseCharacter) -> void:

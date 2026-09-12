@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://npmh6xa6f7x6"]
+
+[ext_resource type="Script" uid="uid://cer4g0qhb83qp" path="res://components/spells/test_spell/test_spell.gd" id="1_y0u6n"]
+
+[node name="TestSpell" type="Node2D" unique_id=133927509]
+script = ExtResource("1_y0u6n")
